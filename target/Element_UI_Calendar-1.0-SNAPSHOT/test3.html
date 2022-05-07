@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：Element_UI_Calendar
+  File name(文件名): test3
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/5/7
+  Time(创建时间)： 21:52
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/element-ui.css">
+    <script src="js/vue.js"></script>
+    <script src="js/element-ui.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <div style="max-width: 900px;">
+        <el-calendar :range="['2022-05-02', '2022-05-29']" v-model="date">
+            <template
+                    slot="dateCell"
+                    slot-scope="{date, data}">
+                <p :class="data.isSelected ? 'is-selected' : ''">
+                    {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
+                </p>
+            </template>
+        </el-calendar>
+
+    </div>
+
+</div>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            date: new Date()
+        },
+        methods: {},
+        mounted()
+        {
+            setInterval(() =>
+            {
+                this.$notify({
+                    type: "success",
+                    title: "提示",
+                    message: "当前选择的是北京时间" + this.date.toLocaleDateString()
+                })
+            }, 3000)
+        }
+    })
+</script>
+</body>
+</html>
